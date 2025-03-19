@@ -1,4 +1,3 @@
-
 # build directories
 cmake-build-*/
 build/
@@ -29,7 +28,6 @@ errors/
 docs/
 vendor/
 imgui.ini
-CMakeLists.txt
 CMakeCache.txt
 CMakeFiles/
 Makefile
