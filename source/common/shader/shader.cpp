@@ -56,6 +56,15 @@ bool our::ShaderProgram::link() const
                     << errMsg << std::endl;
         return false;
     }
+
+     // Double-check linking status
+    GLint linked;
+    glGetProgramiv(this->program, GL_LINK_STATUS, &linked);
+    if (!linked) {
+        std::cerr << "Shader program linking failed unexpectedly!\n";
+        return false;
+    }
+
     return true;
 }
 
