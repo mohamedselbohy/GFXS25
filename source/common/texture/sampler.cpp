@@ -4,6 +4,7 @@
 
 namespace our {
 
+    GLuint Sampler::maxTextureUnits = 0;
     // Given a json object, this function deserializes the sampler state
     void Sampler::deserialize(const nlohmann::json& data){
         if(!data.is_object()) return;
