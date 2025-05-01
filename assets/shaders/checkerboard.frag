@@ -16,6 +16,4 @@ void main(){
         frag_color = vec4(colors[1], 1.0);
     else
         frag_color = vec4(colors[0], 1.0);
-
 }
-

@@ -13,10 +13,10 @@ namespace our {
         } else {
             cameraType = CameraType::PERSPECTIVE;
         }
-        near = data.value("near", 0.01f);
-        far = data.value("far", 100.0f);
+        near = data.value("near", 0.0001f);
+        far = data.value("far", 1000.0f);
         fovY = data.value("fovY", 90.0f) * (glm::pi<float>() / 180);
-        orthoHeight = data.value("orthoHeight", 1.0f);
+        orthoHeight = data.value("orthoHeight", 15.0f);
     }
 
     // Creates and returns the camera view matrix
@@ -35,9 +35,8 @@ namespace our {
         // - the center position which is the point (0,0,-1) but after being transformed by M
         // - the up direction which is the vector (0,1,0) but after being transformed by M
         // then you can use glm::lookAt
-
         glm::vec3 eye = glm::vec3(M * glm::vec4(0, 0, 0, 1));
-        glm::vec3 center = glm::vec3(M * glm::vec4(0, 0, -1, 1));
+        glm::vec3 center = glm::vec3(M * glm::vec4(-10, -15, -20, 1));
         glm::vec3 up = glm::vec3(M * glm::vec4(0, 1, 0, 0));
         // Now we can use glm::lookAt to create the view matrix
         return glm::lookAt(eye, center, up);
@@ -59,7 +58,7 @@ namespace our {
             float right = orthoHeight * aspect_ratio / 2;
             float bottom = -orthoHeight / 2;
             float top = orthoHeight / 2;
-            return glm::ortho(left, right, bottom, top);
+            return glm::ortho(left, right, bottom, top, near, far);
         } else {
             return glm::perspective(fovY, aspect_ratio, near, far);
         }
