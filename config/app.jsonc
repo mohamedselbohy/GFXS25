@@ -198,6 +198,9 @@
                         "type": "Mesh Renderer",
                         "mesh": "frog",
                         "material": "frog"
+                    },
+                    {
+                        "type": "Frog Movement"
                     }
                 ]
             },
