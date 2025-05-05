@@ -4,6 +4,7 @@
 #include "../mesh/mesh.hpp"
 #include "../material/material.hpp"
 #include "../asset-loader.hpp"
+#include "../ecs/entity.hpp"
 
 namespace our {
 

@@ -81,11 +81,18 @@ set(COMMON_SOURCES
         source/common/components/movement.hpp
         source/common/components/movement.cpp
         source/common/components/component-deserializer.hpp
+        source/common/components/frog-movement.hpp
+        source/common/components/frog-movement.cpp
+        source/common/components/collision.hpp
+        source/common/components/collision.cpp
 
         source/common/systems/forward-renderer.hpp
         source/common/systems/forward-renderer.cpp
-        source/common/systems/free-camera-controller.hpp
         source/common/systems/movement.hpp
+        source/common/systems/collision-system.hpp
+        source/common/systems/spawn-entities.hpp
+
+        
 )
 
 # Define the directories in which to search for the included headers
@@ -96,6 +103,7 @@ include_directories(
         vendor/glm
         vendor/imgui
         vendor/utils
+        vendor/bullet3/src
 )
 
 

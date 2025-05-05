@@ -3,6 +3,9 @@
 #include "../components/component-deserializer.hpp"
 
 #include <glm/gtx/euler_angles.hpp>
+#include <iostream>
+#include <string>
+#include <fstream>
 
 namespace our {
 
@@ -23,6 +26,7 @@ namespace our {
     void Entity::deserialize(const nlohmann::json& data){
         if(!data.is_object()) return;
         name = data.value("name", name);
+        actualSize = data.value("size", actualSize);
         localTransform.deserialize(data);
         if(data.contains("components")){
             if(const auto& components = data["components"]; components.is_array()){

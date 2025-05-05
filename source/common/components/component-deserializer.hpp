@@ -6,7 +6,7 @@
 #include "free-camera-controller.hpp"
 #include "frog-movement.hpp"
 #include "movement.hpp"
-
+#include "collision.hpp"
 namespace our
 {
 
@@ -36,6 +36,9 @@ namespace our
         else if (type == FrogMovementComponent::getID())
         {
             component = entity->addComponent<FrogMovementComponent>();
+        }else if (type == CollisionComponent::getID())  // For puzzles and challenges
+        {
+            component = entity->addComponent<CollisionComponent>();
         }
         if (component)
             component->deserialize(data);

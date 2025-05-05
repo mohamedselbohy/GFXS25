@@ -122,6 +122,7 @@ namespace our {
         opaqueCommands.clear();
         transparentCommands.clear();
         for(auto entity : world->getEntities()){
+            if(entity->hidden)continue;
             // If we hadn't found a camera yet, we look for a camera in this entity
             if(!camera) camera = entity->getComponent<CameraComponent>();
             // If this entity has a mesh renderer component
