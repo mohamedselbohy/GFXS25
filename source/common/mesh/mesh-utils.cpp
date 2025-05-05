@@ -47,24 +47,36 @@ our::Mesh* our::mesh_utils::loadOBJ(const std::string& filename) {
                     attrib.vertices[3 * index.vertex_index + 2]
             };
 
-            vertex.normal = {
+            if(index.normal_index >= 0 && (3 * index.normal_index + 2) < attrib.normals.size()) {
+                vertex.normal = {
                     attrib.normals[3 * index.normal_index + 0],
                     attrib.normals[3 * index.normal_index + 1],
                     attrib.normals[3 * index.normal_index + 2]
-            };
+                };
+            } else {
+                vertex.normal = {0.0f, 0.0f, 0.0f}; 
+            }
 
-            vertex.tex_coord = {
+            if(index.texcoord_index >= 0 && (2 * index.texcoord_index + 1) < attrib.texcoords.size()) {
+                vertex.tex_coord = {
                     attrib.texcoords[2 * index.texcoord_index + 0],
                     attrib.texcoords[2 * index.texcoord_index + 1]
-            };
+                };
+            } else {
+                vertex.tex_coord = {0.0f, 0.0f};
+            }
 
 
-            vertex.color = {
+            if((3 * index.vertex_index + 2) < attrib.colors.size()) {
+                vertex.color = {
                     attrib.colors[3 * index.vertex_index + 0] * 255,
                     attrib.colors[3 * index.vertex_index + 1] * 255,
                     attrib.colors[3 * index.vertex_index + 2] * 255,
                     255
-            };
+                };
+            } else {
+                vertex.color = {255, 255, 255, 255}; 
+            }
 
             // See if we already stored a similar vertex
             auto it = vertex_map.find(vertex);

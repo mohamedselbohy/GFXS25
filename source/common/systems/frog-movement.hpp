@@ -7,6 +7,7 @@
 #include <glm/gtc/constants.hpp>
 #include <glm/trigonometric.hpp>
 #include <glm/gtx/fast_trigonometry.hpp>
+#include "../application.hpp"
 
 namespace our
 {

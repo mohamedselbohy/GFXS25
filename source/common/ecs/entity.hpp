@@ -14,15 +14,17 @@ namespace our {
     class Entity{
         World *world; // This defines what world own this entity
         std::list<Component*> components; // A list of components that are owned by this entity
-
+        
         friend World; // The world is a friend since it is the only class that is allowed to instantiate an entity
         Entity() = default; // The entity constructor is private since only the world is allowed to instantiate an entity
     public:
+        glm::vec3 actualSize;
+        bool hidden = false;
+        glm::vec3 size;
         std::string name; // The name of the entity. It could be useful to refer to an entity by its name
         Entity* parent;   // The parent of the entity. The transform of the entity is relative to its parent.
                           // If parent is null, the entity is a root entity (has no parent).
         Transform localTransform; // The transform of this entity relative to its parent.
-
         World* getWorld() const { return world; } // Returns the world to which this entity belongs
 
         glm::mat4 getLocalToWorldMatrix() const; // Computes and returns the transformation from the entities local space to the world space

@@ -8,6 +8,8 @@
 #include <systems/movement.hpp>
 #include <systems/frog-movement.hpp>
 #include <asset-loader.hpp>
+#include <systems/collision-system.hpp>
+#include <systems/spawn-entities.hpp>
 
 // This state shows how to use the ECS framework and deserialization.
 class Playstate: public our::State {
@@ -17,7 +19,11 @@ class Playstate: public our::State {
     our::FreeCameraControllerSystem cameraController;
     our::MovementSystem movementSystem;
     our::FrogMovementSystem frogMovementSystem;
+    our::CollisionSystem collisionSystem;
+    our::SpawnEntities spawnEntities;
+    public:
     void onInitialize() override {
+        // our::FreeCameraControllerSystem::total_time = 0.0f;
         // First of all, we get the scene configuration from the app config
         auto& config = getApp()->getConfig()["scene"];
         // If we have assets in the scene config, we deserialize them
@@ -34,19 +40,26 @@ class Playstate: public our::State {
         // Then we initialize the renderer
         auto size = getApp()->getFrameBufferSize();
         renderer.initialize(size, config["renderer"]);
+        for(auto entity: world.getEntities()) {
+            if(entity->name == "frog") {
+                collisionSystem.setPlayer(entity);
+                break;
+            }
+        }
     }
 
     void onDraw(double deltaTime) override {
         // Here, we just run a bunch of systems to control the world logic
+        spawnEntities.Update((float)deltaTime, &world);
         movementSystem.update(&world, (float)deltaTime);
         frogMovementSystem.update(&world, (float)deltaTime);
         cameraController.update(&world, (float)deltaTime);
         // And finally we use the renderer system to draw the scene
+        int collisionResult = collisionSystem.update(&world);
         renderer.render(&world);
 
         // Get a reference to the keyboard object
         auto& keyboard = getApp()->getKeyboard();
-
         if(keyboard.justPressed(GLFW_KEY_ESCAPE)){
             // If the escape  key is pressed in this frame, go to the play state
             getApp()->changeState("menu");

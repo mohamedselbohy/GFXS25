@@ -9,7 +9,6 @@
 #include <queue>
 #include <tuple>
 #include <filesystem>
-
 #include <flags/flags.h>
 
 #if !defined(NDEBUG)
