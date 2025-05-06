@@ -103,7 +103,6 @@ include_directories(
         vendor/glm
         vendor/imgui
         vendor/utils
-        vendor/bullet3/src
 )
 
 

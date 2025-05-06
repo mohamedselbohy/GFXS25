@@ -12,8 +12,8 @@ namespace our {
     const float CAR_SPAWN_INTERVAL = 3.0f; // seconds
     const float WOOD_SPAWN_INTERVAL = 3.0f;
     
-    const glm::vec3 CAR_INITIAL_POS = {30, 0, -28};
-    const glm::vec3 WOOD_INITIAL_POS = {30, -0.2f, -38.5};
+    const glm::vec3 CAR_INITIAL_POS = {-30, 0, -28};
+    const glm::vec3 WOOD_INITIAL_POS = {-30, -0.2f, -38.5};
 
     std::mt19937 rng(std::random_device{}());
     std::uniform_int_distribution<int> rand01(0, 1);
@@ -55,22 +55,22 @@ namespace our {
             car->getComponent<MeshRendererComponent>()->mesh = AssetLoader<Mesh>().get("car1");
             car->addComponent<CollisionComponent>();
             car->addComponent<MovementComponent>(); 
-            car->getComponent<MovementComponent>()->linearVelocity = {-3, 0, 0};
+            car->getComponent<MovementComponent>()->linearVelocity = {3, 0, 0};
             cars.push_back(car);
         }
         
         void spawnWood(const glm::vec3& pos, World *world) {
             Entity* wood = world->add();
-            wood->localTransform.position=pos;
+            wood->localTransform.position={pos.x, -1.8, pos.z};
             wood->localTransform.rotation = {0, 0, 0};
-            wood->localTransform.scale = {-5, 5, -5};
+            wood->localTransform.scale = {-2, 2, -2};
             wood->name = "wood";
             wood->addComponent<MeshRendererComponent>();
             wood->getComponent<MeshRendererComponent>()->material = AssetLoader<Material>().get("wood");
             wood->getComponent<MeshRendererComponent>()->mesh = AssetLoader<Mesh>().get("wood");
             wood->addComponent<CollisionComponent>();
             wood->addComponent<MovementComponent>(); 
-            wood->getComponent<MovementComponent>()->linearVelocity = {-3, 0, 0};
+            wood->getComponent<MovementComponent>()->linearVelocity = {3, 0, 0};
             woods.push_back(wood);
         }
     };     
