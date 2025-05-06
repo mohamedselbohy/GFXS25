@@ -34,7 +34,7 @@
                 "frog": "assets/textures/frog.png",
                 "wood": "assets/textures/wooden-plank-color.png",
                 "water": "assets/textures/water2.jpg",
-                "car1": "assets/textures/Vinyl_texture.png"
+                "car1": "assets/textures/colors.jpg"
             },
             "meshes":{
                 "cube": "assets/models/cube.obj",
@@ -43,8 +43,8 @@
                 "plane": "assets/models/plane.obj",
                 "grass_plane": "assets/models/grass_plane.obj",
                 "sphere": "assets/models/sphere.obj",
-                "wood": "assets/models/WoodenPlank.obj",
-                "car1": "assets/models/sports-car.obj"
+                "wood": "assets/models/WoodenTable.obj",
+                "car1": "assets/models/model.obj"
             },
             "samplers":{
                 "default":{},
@@ -375,9 +375,18 @@
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "water"
-                    },{
+                    },
+                    {
                         "type":"moving"
+                    },
+                    {
+                        "type": "Collision"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [2, 0, 0]
                     }
+                    
                 ]
             },
             {
@@ -429,6 +438,13 @@
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "water"
+                    },
+                    {
+                        "type": "Collision"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [2, 0, 0]
                     }
                 ]
             },
