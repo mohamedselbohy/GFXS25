@@ -7,6 +7,7 @@
 #include "frog-movement.hpp"
 #include "movement.hpp"
 #include "collision.hpp"
+#include "light-component.hpp"
 namespace our
 {
 
@@ -36,9 +37,14 @@ namespace our
         else if (type == FrogMovementComponent::getID())
         {
             component = entity->addComponent<FrogMovementComponent>();
-        }else if (type == CollisionComponent::getID())  // For puzzles and challenges
+        }
+        else if (type == CollisionComponent::getID()) // For puzzles and challenges
         {
             component = entity->addComponent<CollisionComponent>();
+        }
+        else if (type == LightComponent::getID())
+        {
+            component = entity->addComponent<LightComponent>();
         }
         if (component)
             component->deserialize(data);
