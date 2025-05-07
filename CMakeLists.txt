@@ -85,6 +85,8 @@ set(COMMON_SOURCES
         source/common/components/frog-movement.cpp
         source/common/components/collision.hpp
         source/common/components/collision.cpp
+        source/common/components/light-component.hpp
+        source/common/components/light-component.cpp
 
         source/common/systems/forward-renderer.hpp
         source/common/systems/forward-renderer.cpp

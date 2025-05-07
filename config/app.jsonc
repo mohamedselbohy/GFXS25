@@ -23,6 +23,10 @@
                 "textured":{
                     "vs":"assets/shaders/textured.vert",
                     "fs":"assets/shaders/textured.frag"
+                },
+                "lighting":{
+                    "vs":"assets/shaders/main.vert",
+                    "fs":"assets/shaders/main.frag"
                 }
             },
             "textures":{
@@ -299,6 +303,13 @@
                 //         ]
                 //     }
                 // ]
+            },
+            {
+                "type": "lighting",
+                "lightType": 0,
+                "direction": [-100, -100, -100],
+                "color": [1, 1, 1],
+                "specular": [0.7, 0.6, 0.7]
             },
             {
                 "rotation": [0, 0, 0],

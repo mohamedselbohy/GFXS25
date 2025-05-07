@@ -9,7 +9,7 @@ uniform vec3 camera_position;
 
 uniform mat4 VP;
 uniform mat4 M;
-uniform mat4 M_T; // for normal vectors when dealing with lights
+uniform mat4 M_IT; // for normal vectors when dealing with lights
 
 out Varyings {
     vec3 world;
