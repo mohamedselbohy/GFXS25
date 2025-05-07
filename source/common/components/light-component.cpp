@@ -10,32 +10,13 @@ namespace our {
         if(!data.is_object()) return;
 
 
-        // Deserialize the light type
-        std::string typeStr = data.value("lightType", "DIRECTIONAL");
-        if (typeStr == "DIRECTIONAL") {
-            type = DIRECTIONAL;
-        } else if (typeStr == "POINT") {
-            type = POINT;
-        } else if (typeStr == "SPOT") {
-            type = SPOT;
-        } else {
-            throw std::runtime_error("Invalid light type: " + typeStr);
-        }
-        
-        color = data.value("color", color);
-        intensity = data.value("intensity", intensity);
-        
-        // Deserialize the position, direction, cutOff, outerCutOff, constant, linear, quadratic, and range
-        position = data.value("position", position);
-        direction = data.value("direction", direction);
-        
-        cutOff = data.value("cutOff", cutOff);
-        outerCutOff = data.value("outerCutOff", outerCutOff);
-        
-        constant = data.value("constant", constant);
-        linear = data.value("linear", linear);
-        quadratic = data.value("quadratic", quadratic);
-        range = data.value("range", range);
-        
+        lightType = data.value("lightType", 0);
+        color =data.value("color", glm::vec3(1, 0.9, 0.7));
+        specular =data.value("specular", glm::vec3(1, 0.9, 0.7));
+        attenuation = data.value("attenuation", glm::vec3(1, 0, 0));
+        direction =data.value("direction", glm::vec3(0, -1, 0));
+        position = data.value("position", glm::vec3(0, 0, 0));
+        cone_angles.x = glm::radians((float)data.value("cone_angles.inner", 90));
+        cone_angles.y = glm::radians((float)data.value("cone_angles.outer", 120));
     }
 }
