@@ -8,6 +8,7 @@
 #include <glm/trigonometric.hpp>
 #include <glm/gtx/fast_trigonometry.hpp>
 #include <iostream>
+#include <vector>
 #include <string>
 
 namespace our
@@ -31,22 +32,15 @@ namespace our
             std::string name = (a->name != "") ? a->name : "nullptr";
             if (name == "nullptr")
                 return 0;
-            // std::cout << a->name << " Pos: " << apos.x << ", " << apos.y << ", " << apos.z << " | Size: "
-            //           << asize.x << ", " << asize.y << ", " << asize.z << "\n";
-            // std::cout << "player Pos: " << bpos.x << ", " << bpos.y << ", " << bpos.z << " | Size: "
-            //           << bsize.x << ", " << bsize.y << ", " << bsize.z << "\n";
-            // std::cout << "temp1: " << temp1 << ", temp2: " << temp2 << ", temp3: " << temp3 << "\n";
-            // std::cout << "asize: " << asize.x + bsize.x << ", " << asize.y + bsize.y << ", " << asize.z + bsize.z << "\n";
-
             bool ok = (std::abs(apos.x - bpos.x)*2 < (asize.z + bsize.z)) &&
                       (std::abs(apos.y - bpos.y)*2 < (asize.y + bsize.y)) &&
                       (std::abs(apos.z - bpos.z)*2 < (asize.x + bsize.x));
-            // std::cout << "Collision check: " << ok << "\n";
             return ok;
         }
 
-        int update(World *world)
+        int update(World *world, std::vector<Entity*> woods)
         {
+            long long count = 0;
             for (auto &entity : world->getEntities())
             {
                 if (entity->hidden || entity == player)
@@ -57,18 +51,31 @@ namespace our
                     std::string name = entity->name;
                     if (checkAABBCollision(entity, player))
                     {
-                        std::cout << "Collision detected with entity: " << name << "\n";
-                        player->hidden = true;                     
+                        // std::cout << "Collision detected with carrrrrrr: " << name << "\n";
+                        return 0;                   
                     }
                 } 
-                if(entity->name == "water") {
-                    if(checkAABBCollision(entity, player)) {
-                        bool checkWoodCollision = false;
-                        for(auto &e: world->getEntities()) {
-                            if(e->name=="wood"&&checkAABBCollision(e, player)) {checkWoodCollision=true; break;}
+                glm::vec3 ppos = player->localTransform.position;
+                if((ppos.z<16.5&&ppos.z>6.5) || (ppos.z<-33.5&&ppos.z>-43.5)) {
+                    bool checkWoodCollision = false;
+                    for(auto &wood: woods) {
+                        if(checkAABBCollision(wood, player)) {
+                            player->getComponent<MovementComponent>()->linearVelocity = {5, 0, 0};
+                            // std::cout<<"WOOD"<<'\n';
+                            checkWoodCollision=true; 
+                            break;
                         }
-                        if(!checkWoodCollision) player->hidden = true;
+                        else {
+                            player->getComponent<MovementComponent>()->linearVelocity = {0, 0, 0};
+                        }
                     }
+                    if(!checkWoodCollision) return 0;
+                } else {
+                    player->getComponent<MovementComponent>()->linearVelocity = {0, 0, 0};
+                }
+                if(entity->name == "star" && checkAABBCollision(entity, player)) {
+                    // Winning 
+                    return 2;
                 }
             }
             return 1;

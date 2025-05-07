@@ -12,7 +12,7 @@ namespace our {
     // For a more complex example of how to use the ECS framework, see "free-camera-controller.hpp"
     class FrogMovementComponent : public Component {
     public:
-        glm::vec3 linearVelocity = {3, 3, -3}; // Each frame, the entity should move as follows: position += linearVelocity * deltaTime 
+        glm::vec3 linearVelocity = {2, 2, -2}; // Each frame, the entity should move as follows: position += linearVelocity * deltaTime 
 
         // The ID of this component type is "Movement"
         static std::string getID() { return "Frog Movement"; }
