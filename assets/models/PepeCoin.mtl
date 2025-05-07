@@ -1,0 +1,14 @@
+# Blender MTL File: 'coin errase later.blend'
+# Material Count: 1
+
+newmtl Coin
+Ns 615.942172
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Bump -bm 0.400000 PepeCoinnormals.png
+map_Kd PepeCoinText.png

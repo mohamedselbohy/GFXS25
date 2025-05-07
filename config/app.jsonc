@@ -1,8 +1,8 @@
 {
-    "start-scene": "play",
+    "start-scene": "menu",
     "window":
     {
-        "title":"Default Game Window",
+        "title":"Jumper Frog",
         "size":{
             "width":1280,
             "height":720
@@ -32,9 +32,10 @@
                 "glass": "assets/textures/glass-panels.png",
                 "monkey": "assets/textures/monkey.png",
                 "frog": "assets/textures/frog.png",
-                "wood": "assets/textures/wooden-plank-color.png",
+                "wood": "assets/textures/crate_albedo.png",
                 "water": "assets/textures/water2.jpg",
-                "car1": "assets/textures/colors.jpg"
+                "car1": "assets/textures/colors.jpg",
+                "star": "assets/textures/DefaultMaterial_Base_Color.png"
             },
             "meshes":{
                 "cube": "assets/models/cube.obj",
@@ -43,8 +44,10 @@
                 "plane": "assets/models/plane.obj",
                 "grass_plane": "assets/models/grass_plane.obj",
                 "sphere": "assets/models/sphere.obj",
-                "wood": "assets/models/WoodenTable.obj",
-                "car1": "assets/models/model.obj"
+                "wood": "assets/models/crate.obj",
+                "car1": "assets/models/model.obj",
+                "star": "assets/models/PepeCoin.obj",
+                "win": "assets/models/modelwin.obj"
             },
             "samplers":{
                 "default":{},
@@ -163,6 +166,21 @@
                     "texture": "frog",
                     "sampler": "default"
                 },
+                "star":{
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling":{
+                            "enabled": false
+                        },
+                        "depthTesting":{
+                            "enabled": true
+                        }
+                    },
+                    "tint": [1, 1, 1, 1],
+                    "texture": "star",
+                    "sampler": "default"
+                },
                 "car1":{
                     "type": "textured",
                     "shader": "textured",
@@ -191,6 +209,49 @@
                     },
                     "tint": [1, 1, 1, 1],
                     "texture": "wood",
+                    "sampler": "default"
+                    
+                },
+                "woodAura": {
+                    "type": "tinted",
+                    "shader": "tinted",
+                    "pipelineState": {
+                        "faceCulling":{
+                            "enabled": false
+                        },
+                        "depthTesting":{
+                            "enabled": true
+                        },
+                        "blending":{
+                            "enabled": true,
+                            "sourceFactor": "GL_SRC_ALPHA",
+                            "destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
+                        },
+                        "depthMask": false
+                    },
+                    "transparent": true,
+                    "tint": [1, 1, 1, 0],
+                    "texture": "glass",
+                    "sampler": "pixelated"
+                },
+                "win": {
+                    "type": "tinted",
+                    "shader": "tinted",
+                    "pipelineState": {
+                        "faceCulling":{
+                            "enabled": false
+                        },
+                        "depthTesting":{
+                            "enabled": true
+                        },
+                        "blending":{
+                            "enabled": true,
+                            "sourceFactor": "GL_SRC_ALPHA",
+                            "destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
+                        },
+                        "depthMask": false
+                    },
+                    "tint": [1, 0, 0, 1],
                     "sampler": "default"
                 },
                 "moon":{
@@ -252,51 +313,55 @@
                     },
                     {
                         "type": "Frog Movement"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [0, 0, 0]
                     }
                 ]
             },
-            // {
-            //     "position": [15, 0, -28],
-            //     "rotation": [0, 90, 0],
-            //     "scale": [-1.5, 1.5, -1.5],
-            //     "size": [3.38, 1.11, 1.18],
-            //     "name": "car1",
-            //     "components": [
-            //         {
-            //             "type": "Mesh Renderer",
-            //             "mesh": "car1",
-            //             "material": "car1"
-            //         },
-            //         {
-            //             "type":"Collision"
-            //         },
-            //         {
-            //             "type": "Movement",
-            //             "linearVelocity": [-3, 0, 0]
-            //         }
-            //     ]
-            // },
-            // {
-            //     "position": [-15, 0, -28],
-            //     "rotation": [0, 90, 0],
-            //     "scale": [-1.5, 1.5, -1.5],
-            //     "size": [3.38, 1.11, 1.18],
-            //     "name": "car1",
-            //     "components": [
-            //         {
-            //             "type": "Mesh Renderer",
-            //             "mesh": "car1",
-            //             "material": "car1"
-            //         },
-            //         {
-            //             "type":"Collision"
-            //         },
-            //         {
-            //             "type": "Movement",
-            //             "linearVelocity": [-3, 0, 0]
-            //         }
-            //     ]
-            // },
+            {
+                "position": [7, 0, -7.5],
+                "rotation": [0, 0, 0],
+                "scale": [-1.8, 1.8, -1.8],
+                "size": [3.38, 1.11, 1.18],
+                "name": "car1",
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "car1",
+                        "material": "car1"
+                    },
+                    {
+                        "type":"Collision"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [10, 0, 0]
+                    }
+                ]
+            },
+            {
+                "position": [-25, 0, -7.5],
+                "rotation": [0, 0, 0],
+                "scale": [-1.8, 1.8, -1.8],
+                "size": [3.38, 1.11, 1.18],
+                "name": "car1",
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "car1",
+                        "material": "car1"
+                    },
+                    {
+                        "type":"Collision"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [10, 0, 0]
+                    }
+                ]
+            },
             // {
             //     "position": [-25, -0.2, -38.5],
             //     "rotation": [0, 90, 0],
@@ -377,14 +442,11 @@
                         "material": "water"
                     },
                     {
-                        "type":"moving"
-                    },
-                    {
                         "type": "Collision"
                     },
                     {
                         "type": "Movement",
-                        "linearVelocity": [2, 0, 0]
+                        "linearVelocity": [5, 0, 0]
                     }
                     
                 ]
@@ -444,7 +506,36 @@
                     },
                     {
                         "type": "Movement",
-                        "linearVelocity": [2, 0, 0]
+                        "linearVelocity": [5, 0, 0]
+                    }
+                ]
+            },
+            {
+                "position": [0, 0, -48.5],
+                "rotation": [90, 90, 0],
+                "scale": [1, 1, 1],
+                "name": "grass",
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "grass_plane",
+                        "material": "grass"
+                    }
+                ]
+            },
+            {
+                "position": [0, 0, -48.5],
+                "rotation": [0, 0, 0],
+                "scale": [3, 3, 3],
+                "name": "star",
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "star",
+                        "material": "star"
+                    },
+                    {
+                        "type": "Collision"
                     }
                 ]
             },

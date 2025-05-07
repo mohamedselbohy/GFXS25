@@ -73,11 +73,11 @@ namespace our
             // S & W moves the player back and forth
             // if(app->getKeyboard().isPressed(GLFW_KEY_W)) position += front * (deltaTime * current_sensitivity.z);
             total_time += deltaTime;
-            if(app->getKeyboard().isPressed(GLFW_KEY_W) && total_time >= 0.25){ position += glm::vec3(0, 0, -3); total_time = 0;}
-            if(app->getKeyboard().isPressed(GLFW_KEY_S) && total_time >= 0.25){ position += glm::vec3(0, 0, 3); total_time = 0;}
+            if(app->getKeyboard().isPressed(GLFW_KEY_W) && total_time >= 0.25){ position += glm::vec3(0, 0, -2); total_time = 0;}
+            if(app->getKeyboard().isPressed(GLFW_KEY_S) && total_time >= 0.25){ position += glm::vec3(0, 0, 2); total_time = 0;}
             // A & D moves the player left or right 
-            if(app->getKeyboard().isPressed(GLFW_KEY_D) && total_time >= 0.25){ position += glm::vec3(3, 0, 0); total_time = 0;}
-            if(app->getKeyboard().isPressed(GLFW_KEY_A) && total_time >= 0.25){ position += glm::vec3(-3, 0, 0); total_time = 0;}
+            if(app->getKeyboard().isPressed(GLFW_KEY_D) && total_time >= 0.25){ position += glm::vec3(2, 0, 0); total_time = 0;}
+            if(app->getKeyboard().isPressed(GLFW_KEY_A) && total_time >= 0.25){ position += glm::vec3(-2, 0, 0); total_time = 0;}
         }
 
         // When the state exits, it should call this function to ensure the mouse is unlocked
